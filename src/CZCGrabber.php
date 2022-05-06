@@ -64,6 +64,7 @@ class CZCGrabber implements Grabber
         $product = self::createProduct($doc);
         if ($product) {
             $product->setPrice(self::grabPrice($doc));
+            $product->setRating(self::grabRating($doc));
         }
 
         return $product;
@@ -136,6 +137,20 @@ class CZCGrabber implements Grabber
             $price = Strings::replace($price, '/[^0-9,.]/', '');
 
             return floatval($price);
+        } else return null;
+    }
+
+
+    public static function grabRating(\DOMDocument $doc): ?float
+    {
+        $path = new \DOMXPath($doc);
+        $ratingEl = $path->query('//span[@class="rating"]/span[@class="rating__label"]');
+
+        if ($ratingEl->length !== 0) {
+            $rating = trim($ratingEl->item(0)->textContent);
+            $rating = Strings::replace($rating, '/[^0-9,.]/', '');
+
+            return floatval($rating) / 100;
         } else return null;
     }
 }
