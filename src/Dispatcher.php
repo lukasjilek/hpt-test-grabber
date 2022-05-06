@@ -6,14 +6,17 @@ namespace HPT;
 
 class Dispatcher
 {
+    private $input;
+
     /** @var Grabber */
     private $grabber;
 
     /** @var Output */
     private $output;
 
-    public function __construct(Grabber $grabber, Output $output)
+    public function __construct($input, Grabber $grabber, Output $output)
     {
+        $this->input = $input;
         $this->grabber = $grabber;
         $this->output = $output;
     }
@@ -23,7 +26,13 @@ class Dispatcher
      */
     public function run(): string
     {
-        // code here
+        while (($productId = fgets($this->input)) !== false) {
+            $productId = trim(preg_replace('/\s+/', ' ', $productId));
+
+            $this->output->addProduct($productId, $this->grabber->getProduct($productId));
+        }
+
+        fclose($this->input);
 
         return $this->output->getJson();
     }

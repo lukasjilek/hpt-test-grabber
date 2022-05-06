@@ -5,13 +5,13 @@ DOCKER_COMPOSE=docker-compose
 
 
 
-.PHONY: run #install #composer
+.PHONY: run install #composer
 
-run: #install
+run: install
 	@${DOCKER_COMPOSE} run --rm php php run.php
 
-install:  #composer
+install: composer
 
 
-#composer: login
-#	@${DOCKER_COMPOSE} run --rm php composer install --no-interaction --no-ansi
+composer:
+	@${DOCKER_COMPOSE} run --rm composer install --no-interaction --no-ansi

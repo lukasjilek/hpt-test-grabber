@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-echo "BEGIN" . PHP_EOL;
+require_once __DIR__ . '/vendor/autoload.php';
 
 // code here
-// $dispatcher = new \HPT\Dispatcher( ... );
-// $dispatcher->run();
+$input = fopen("vstup.txt", "r");
 
-echo "END" . PHP_EOL;
+$dispatcher = new \HPT\Dispatcher($input, new \HPT\CZCGrabber(), new \HPT\ProductOutput());
+
+echo $dispatcher->run() . PHP_EOL;;

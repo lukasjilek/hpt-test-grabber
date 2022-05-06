@@ -7,4 +7,14 @@ services:
     working_dir: /usr/src/hpt-test-grabber
     volumes:
       - ./src:/usr/src/hpt-test-grabber/src:ro
+      - ./vendor:/usr/src/hpt-test-grabber/vendor:ro
+
       - ./run.php:/usr/src/hpt-test-grabber/run.php:ro
+
+      - ./vstup.txt:/usr/src/hpt-test-grabber/vstup.txt:ro
+
+  composer:
+    image: composer
+    working_dir: /usr/src/hpt-test-grabber
+    volumes:
+      - .:/usr/src/hpt-test-grabber:rw

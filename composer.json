@@ -1,0 +1,16 @@
+{
+    "name": "lukasjilek/hpt-test-grabber",
+    "description": "HPT test grabber",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Lukáš Jílek"
+        }
+    ],
+    "require": {
+        "nette/utils": "^3.2"
+    },
+    "autoload": {
+      "classmap": ["src/"]
+    }
+}
